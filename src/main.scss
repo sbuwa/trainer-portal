@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+
+html{
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App {
+  text-align: center;
+  background-color: #fff;
+  color: #121212;
+  height: 100vh;
+}
+
+.frm-container{
+  display: grid;
+  // grid-template-columns: 1fr;
+  flex-direction: column;
+  padding: 60px;
+  background-color: rgba(123, 123, 123, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+
+  h1{
+    font-weight: normal;
+  }
+  .form-item{
+    margin-top: 1.5rem;
+  }
+  .form-item>button{
+    margin-top: 3.5rem;
+  }
+  input{
+    font-size: 1.2em;
+    padding: .7rem;
+    width: 400px;
+  }
+  button{
+    font-size: 1.2em;
+    font-weight: 300;
+    padding: .7rem;
+    min-width: 150px;
+    margin: auto;
+    cursor: pointer;
+  }
+} 
+
+.btn-add{
+  font-size: 1.2em;
+  height: 3rem;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+
+/*----- table CSS -----*/
+table {
+  border-collapse: collapse;
+  margin: 10px auto 20px auto;
+  background-color: rgba(123, 123, 123, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  }
+  
+  // /*----- table headings -----*/
+  // th {
+  // // background-color: #aecbeb;
+  // border: 1px solid black;
+  // padding: 10px;
+  // text-align: left;
+  // font-size: 18px;
+  // }
+  
+  
+  // /*----- table data (a cell) -----*/
+  // td {
+  // padding: 8px;
+  // border-bottom: 1px solid black;
+  // }

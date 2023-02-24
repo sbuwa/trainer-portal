@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './main.scss';
+import ClientLogin from './components/client/ClientLogin';
+import RootLogin from './components/RootLogin';
+import TrainerLogin from './components/trainer/TrainerLogin';
+import TrainerDashboard from './components/trainer/TrainerDashboard';
+import TrainerSessions from './components/trainer/TrainerSessions';
+import TrainerClientsPage from './components/trainer/TrainerClientsPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Router>
+				<Routes>
+					<Route path="/" element={<RootLogin />} />
+					<Route path="trainer-login" element={<TrainerLogin />} />
+					<Route
+						path="trainer-dashboard"
+						element={<TrainerDashboard />}
+					/>
+					<Route
+						path="trainer-sessions"
+						element={<TrainerSessions />}
+					/>
+					<Route
+						path="trainer-clients-page"
+						element={<TrainerClientsPage />}
+					/>
+					<Route path="client-login" element={<ClientLogin />} />
+				</Routes>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
