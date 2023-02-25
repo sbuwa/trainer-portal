@@ -6,12 +6,12 @@ const RootLogin = () => {
 	return (
 		<div className="rootContainer">
 			<div className="circle" />
-			<Link to="/trainer-login">
+			<Link to="/trainer-login" style={{ textDecoration: 'none' }}>
 				<div className="lgn-box">Trainer Login</div>
 			</Link>
-			<Link to="/client-login">
+			{/* <Link to="/client-login">
 				<div className="lgn-box">Client Login</div>
-			</Link>
+			</Link> */}
 		</div>
 	);
 };

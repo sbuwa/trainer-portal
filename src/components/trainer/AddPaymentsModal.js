@@ -27,13 +27,20 @@ const style = {
 	p: 4,
 };
 
-const AddSessionModal = (props) => {
+const AddPaymentsModal = (props) => {
 	const [clientNames, setClientNames] = useState(props.clients);
 	const [selectedClientId, setSelectedClientId] = useState('');
 	const [name, setName] = useState('');
+	const [amount, setAmount] = useState('');
 	const [date, setDate] = useState('');
 	const [fromTime, setFromTime] = useState('');
 	const [toTime, setToTime] = useState('');
+	const [errors, setErrors] = useState({
+		name: '',
+		username: '',
+		phone: '',
+		address: '',
+	});
 
 	useEffect(() => {
 		let names = props.clients.map((item) => item.data.name);
@@ -42,6 +49,7 @@ const AddSessionModal = (props) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
 		let clientId = '';
 		let clientName = '';
 		const obj = props.clients.find((item) => item.data.name === name);
@@ -53,15 +61,14 @@ const AddSessionModal = (props) => {
 			setSelectedClientId(clientId);
 			// setClientNames(clientName);
 		}
-		let sessionToDb = {
+		let paymentToDb = {
 			client_id: clientId,
 			client_name: clientName,
-			session_date: date.format('DD-MM-YYYY'),
-			session_start: fromTime.format('hh:mm A'),
-			session_end: toTime.format('hh:mm A'),
+			payment_date: date.format('DD-MM-YYYY'),
+			payment_amount: amount,
 		};
 		// console.log(date.format('DD-MM-YYYY'));
-		props.addSession(sessionToDb);
+		props.addPayment(paymentToDb);
 		props.closeModal();
 	};
 
@@ -91,7 +98,13 @@ const AddSessionModal = (props) => {
 								))}
 							</Select>
 						</FormControl>
-
+						<TextField
+							label="Payment Amount"
+							value={amount}
+							onChange={(event) => setAmount(event.target.value)}
+							margin="normal"
+							fullWidth
+						/>
 						<LocalizationProvider dateAdapter={AdapterMoment}>
 							<DatePicker
 								label="Date"
@@ -107,8 +120,8 @@ const AddSessionModal = (props) => {
 								)}
 							/>
 						</LocalizationProvider>
-						<br></br>
-						<LocalizationProvider dateAdapter={AdapterMoment}>
+						{/* <br></br> */}
+						{/* <LocalizationProvider dateAdapter={AdapterMoment}>
 							<TimePicker
 								label="From"
 								value={fromTime}
@@ -141,7 +154,7 @@ const AddSessionModal = (props) => {
 									/>
 								)}
 							/>
-						</LocalizationProvider>
+						</LocalizationProvider> */}
 						<br></br>
 						<Button
 							type="submit"
@@ -158,4 +171,4 @@ const AddSessionModal = (props) => {
 	);
 };
 
-export default AddSessionModal;
+export default AddPaymentsModal;

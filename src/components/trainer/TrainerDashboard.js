@@ -27,8 +27,15 @@ const TrainerDashboard = () => {
 				>
 					<div className="action-container">Members</div>
 				</Link>
-				<div className="action-container">Diet Plans</div>
-				<div className="action-container">View Payments</div>
+				<Link
+					to="/diet-plan-creator"
+					style={{ textDecoration: 'none' }}
+				>
+					<div className="action-container">Diet Plans</div>
+				</Link>
+				<Link to="/payments" style={{ textDecoration: 'none' }}>
+					<div className="action-container">View Payments</div>
+				</Link>
 			</div>
 		</div>
 	);

@@ -89,11 +89,6 @@ const TrainerSessions = () => {
 	// };
 
 	const handleAddSession = (newSession) => {
-		// console.log('[selectedId]', selectedId);
-		// console.log('[date]', date.format('DD-MM-YYYY'));
-		// console.log('[fromTime]', fromTime.format('hh:mm A'));
-		console.log('[newSession]', newSession);
-
 		addDoc(collection(db, 'trainer_sessions'), newSession)
 			.then(() => {
 				console.log('New session added!');

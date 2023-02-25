@@ -68,6 +68,15 @@
     }
 }
 
+.trnr-payment-container{
+    .payment-tbl-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5rem 10rem 0 10rem;
+    }
+}
+
 .trnr-clients-container{
     .clients-tbl-title{
         display: flex;
@@ -81,4 +90,30 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.diet-plan-container{
+    // position: relative;
+    // width: 100;
+}
+
+.diet-table-container{
+    // background-color: #1f1f1f;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.handson-table{
+    width: 35%;
+    // transform: translate(50%,0);
+    // margin: auto
+    // position: absolute;
+    // left: 67%;
+    // transform: translate(-50%, 0);
+    // z-index: 1;
+}
+
+.handsontable{
+    font-size: 13px;
 }

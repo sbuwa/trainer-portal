@@ -6,6 +6,8 @@ import TrainerLogin from './components/trainer/TrainerLogin';
 import TrainerDashboard from './components/trainer/TrainerDashboard';
 import TrainerSessions from './components/trainer/TrainerSessions';
 import TrainerClientsPage from './components/trainer/TrainerClientsPage';
+import DietPlanCreator from './components/trainer/DietPlanCreator';
+import Payments from './components/trainer/Payments';
 
 function App() {
 	return (
@@ -27,6 +29,11 @@ function App() {
 						element={<TrainerClientsPage />}
 					/>
 					<Route path="client-login" element={<ClientLogin />} />
+					<Route
+						path="diet-plan-creator"
+						element={<DietPlanCreator />}
+					/>
+					<Route path="payments" element={<Payments />} />
 				</Routes>
 			</Router>
 		</div>
