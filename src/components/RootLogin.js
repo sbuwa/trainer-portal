@@ -9,9 +9,6 @@ const RootLogin = () => {
 			<Link to="/trainer-login" style={{ textDecoration: 'none' }}>
 				<div className="lgn-box">Trainer Login</div>
 			</Link>
-			{/* <Link to="/client-login">
-				<div className="lgn-box">Client Login</div>
-			</Link> */}
 		</div>
 	);
 };
