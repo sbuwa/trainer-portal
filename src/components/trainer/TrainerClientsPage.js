@@ -120,15 +120,15 @@ const TrainerClientsPage = () => {
 		setDeleteDialogOpen(false);
 	};
 
-	const handleUpdateButtonClicked = (id) => {
-		// console.log(id);
-		setUpdateClientId(id);
-		const userData = clients.find((data) => {
-			return (data.id = id);
-		});
-		setUpdateClientData(userData);
-		handleUpdateClientModalOpen(true);
-	};
+	// const handleUpdateButtonClicked = (id) => {
+	// 	// console.log(id);
+	// 	setUpdateClientId(id);
+	// 	const userData = clients.find((data) => {
+	// 		return (data.id = id);
+	// 	});
+	// 	setUpdateClientData(userData);
+	// 	handleUpdateClientModalOpen(true);
+	// };
 
 	const handleUpdateClient = (newFields) => {
 		const userDoc = doc(db, 'clients', updateClientId);

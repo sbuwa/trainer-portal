@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import {
+	collection,
+	getDocs,
+	addDoc,
+	deleteDoc,
+	doc,
+} from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import {
+	Tooltip,
+	IconButton,
+	Dialog,
+	DialogActions,
+	DialogTitle,
+	DialogContentText,
+	DialogContent,
+	Button,
+	Alert,
 	Table,
 	TableContainer,
 	TableHead,
@@ -9,6 +24,7 @@ import {
 	TableCell,
 	TableBody,
 } from '@mui/material';
+import { DeleteForeverTwoTone } from '@mui/icons-material';
 import '../../main.scss';
 import './Trainer.scss';
 import AddPaymentsModal from './AddPaymentsModal';
@@ -16,6 +32,9 @@ import AddPaymentsModal from './AddPaymentsModal';
 const Payments = () => {
 	const [clients, setClients] = useState([]);
 	const [payments, setPayments] = useState([]);
+	const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+	const [deleteClientId, setdeleteClientId] = useState('');
+	const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 	const [addPaymentModalOpen, setAddPaymentModalOpen] = useState(false);
 	const paymentCollRef = collection(db, 'payments');
 	const clientCollRef = collection(db, 'clients');
@@ -75,6 +94,34 @@ const Payments = () => {
 		setAddPaymentModalOpen(false);
 	};
 
+	const handleDelete = (id) => {
+		setDeleteDialogOpen(true);
+		setdeleteClientId(id);
+	};
+
+	const handleDeleteDialogClose = () => {
+		setDeleteDialogOpen(false);
+		setdeleteClientId('');
+	};
+
+	const showDeleteAlertFn = () => {
+		setShowDeleteAlert(true);
+	};
+
+	const handleDeleteConfirm = () => {
+		if (deleteClientId !== '') {
+			const userDoc = doc(db, 'payments', deleteClientId);
+			deleteDoc(userDoc)
+				.then((res) => {
+					console.log('[res]', res);
+					showDeleteAlertFn(true);
+					getPayments();
+				})
+				.catch((error) => console.log(error));
+		}
+		setDeleteDialogOpen(false);
+	};
+
 	return (
 		<div>
 			<div className="trnr-payment-container">
@@ -93,6 +140,48 @@ const Payments = () => {
 					closeModal={handleAddPaymentModalClose}
 					addPayment={handleAddPayment}
 				/>
+				<Dialog
+					open={deleteDialogOpen}
+					onClose={handleDeleteDialogClose}
+					aria-labelledby="alert-dialog-title"
+					aria-describedby="alert-dialog-description"
+				>
+					<DialogTitle id="alert-dialog-title">
+						{'Confirm Payment Deletion'}
+					</DialogTitle>
+					<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							Are you sure you want to delete this payment? This
+							action cannot be undone.
+						</DialogContentText>
+					</DialogContent>
+					<DialogActions>
+						<Button
+							onClick={handleDeleteDialogClose}
+							color="primary"
+						>
+							Cancel
+						</Button>
+						<Button
+							onClick={handleDeleteConfirm}
+							color="secondary"
+							autoFocus
+						>
+							Delete
+						</Button>
+					</DialogActions>
+				</Dialog>
+				{showDeleteAlert && (
+					<div className="add-client-alert">
+						<Alert
+							onClose={() => setShowDeleteAlert(false)}
+							severity="error"
+							sx={{ width: 500 }}
+						>
+							Session Deleted
+						</Alert>
+					</div>
+				)}
 				<TableContainer>
 					<Table
 						sx={{ minWidth: 450, maxWidth: 650 }}
@@ -117,6 +206,15 @@ const Payments = () => {
 									<TableCell>
 										{payment.data.payment_amount}
 									</TableCell>
+									<Tooltip title="Delete">
+										<IconButton
+											onClick={() =>
+												handleDelete(payment.id)
+											}
+										>
+											<DeleteForeverTwoTone />
+										</IconButton>
+									</Tooltip>
 								</TableRow>
 							))}
 						</TableBody>

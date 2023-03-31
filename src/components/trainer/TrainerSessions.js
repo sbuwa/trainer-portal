@@ -125,9 +125,10 @@ const TrainerSessions = () => {
 
 	const handleDeleteConfirm = () => {
 		if (deleteClientId !== '') {
-			const userDoc = doc(db, 'sessions', deleteClientId);
+			const userDoc = doc(db, 'trainer_sessions', deleteClientId);
 			deleteDoc(userDoc)
-				.then(() => {
+				.then((res) => {
+					console.log('[res]', res);
 					showDeleteAlertFn(true);
 					getSessions();
 				})
